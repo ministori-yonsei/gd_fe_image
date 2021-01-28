@@ -6,8 +6,7 @@
 
 현재 위치 표시 버튼 클릭후 현재 위치 지도 표시, 해당 위치의 날씨/기온 표시
 
-> 기상청, Open Weather MAP, 공공 데이터 API 사용.
-
+> 기상청, Open Weather MAP, 공공 데이터 API 사용.<br/>
 > 구글 MAP, 카카오 MAP API 사용.
 
 ## 앱 디자인
