@@ -6,6 +6,9 @@
 
 현재 위치 표시 버튼 클릭후 현재 위치 지도 표시, 해당 위치의 날씨/기온 표시
 
+> 기상청, Open Weather MAP, 공공 데이터 API 사용.
+> 구글 MAP, 카카오 MAP API 사용.
+
 ## 앱 디자인
 
 <img src="https://github.com/ministori-yonsei/gd_fe_image/blob/main/frontend/design/mini_prj.png" height="450px" title="px(픽셀) 크기 설정" alt="RubberDuck"></img>
