@@ -7,4 +7,8 @@
 
 ## Open Weather MAP
 
+세계 날씨 예보 - 현재 날씨/온도 데이터 API
+
 URL : <https://openweathermap.org/>
+
+
