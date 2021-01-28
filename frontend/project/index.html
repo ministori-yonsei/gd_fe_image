@@ -5,10 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>지도웹앱</title>
     <link rel="stylesheet" href="css/style.css" />
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7e9e83ed79310b33dc9eecf541a3c635"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7e9e83ed79310b33dc9eecf541a3c635&libraries=services"></script>
     <script defer src="js/function.js"></script>
 </head>
 <body>
     <div id="map" class="map-area"></div>
+    <div class="form-section">
+        <div class="input-address-container">
+            <input type="text" class="input-address" />
+            <button type="button" class="button-search">
+                <img src="images/search-512.png" alt="검색" />
+            </button>
+        </div>
+        <button type="button" class="button-weather">날씨보기</button>
+        <button type="button" class="button-position">현재위치보기</button>
+    </div>
 </body>
 </html>
