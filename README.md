@@ -1,9 +1,13 @@
 # 구디 아카데미 레포지토리
 
-# VS Code
+# IDE
 
-## plug in
+## VS Code plug in
 
 Open in browser
 
-Live Server 
+Live Server
+
+# FTP
+
+## Filezilla
