@@ -11,4 +11,12 @@
 
 URL : <https://openweathermap.org/>
 
+## Kakao Map API
 
+카카오 지도 API - 지도 검색, 관련 데이터 API
+
+URL : <https://apis.map.kakao.com/>
+
+카카오 개발자 사이트 - 키 발급
+
+URL : <https://developers.kakao.com>
