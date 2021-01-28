@@ -12,25 +12,47 @@ var map = new kakao.maps.Map(container, options);
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
 
-let address = '서울시 금천구 가산디지털2로 115';
+// let address = '서울시 금천구 가산디지털2로 115';
 
-// 주소로 좌표를 검색합니다
-geocoder.addressSearch( address, function(result, status){
+function formSearch(){
 
-    // 정상적으로 검색이 완료됐으면
-    if (status === kakao.maps.services.Status.OK) {
+    let address = document.querySelector('.input-address').value;
 
-        // 주소로 검색한 위치 좌표를 지도의 위치로 대응
-        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+    // 주소로 좌표를 검색합니다
+    geocoder.addressSearch( address, function(result, status){
 
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new kakao.maps.Marker({
-            map: map,
-            position: coords
-        });
+        // 정상적으로 검색이 완료됐으면
+        if (status === kakao.maps.services.Status.OK) {
 
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
+            // 주소로 검색한 위치 좌표를 지도의 위치로 대응
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+            // 결과값으로 받은 위치를 마커로 표시합니다
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: coords
+            });
+
+            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+            map.setCenter(coords);
+        }
+
+    } );
+
+}
+
+document.querySelector('.button-search').addEventListener('click', function(){
+
+    formSearch();
+
+});
+
+document.querySelector('.input-address').addEventListener('keypress', function(event){
+
+    if(event.key === 'Enter'){
+
+        formSearch();
+
     }
 
-} );
+});
