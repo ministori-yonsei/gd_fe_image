@@ -7,4 +7,4 @@
 
 ## Open Weather MAP
 
-URL : [https://openweathermap.org/][https://openweathermap.org/]
+URL : <https://openweathermap.org/>
