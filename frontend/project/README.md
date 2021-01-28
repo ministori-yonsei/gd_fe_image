@@ -1,5 +1,15 @@
 # 프로젝트 설명
 
+## 앱 기획
+
+카카오 맵에서 주소 검색후 결과 위치를 지도에서 표시
+
+해당 위치의 날씨/기온 표시
+
+현재 위치 표시 버튼 클릭후 현재 위치 지도 표시
+
+해당 위치의 날씨/기온 표시
+
 ## 앱 디자인
 
 <img src="https://github.com/ministori-yonsei/gd_fe_image/blob/main/frontend/design/mini_prj.png" height="450px" title="px(픽셀) 크기 설정" alt="RubberDuck"></img>
