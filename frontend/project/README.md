@@ -5,3 +5,6 @@
 <img src="https://github.com/ministori-yonsei/gd_fe_image/blob/main/frontend/design/mini_prj.png" height="450px" title="px(픽셀) 크기 설정" alt="RubberDuck"></img>
 <img src="https://github.com/ministori-yonsei/gd_fe_image/blob/main/frontend/design/mini_prj_weather.png" height="450px" title="px(픽셀) 크기 설정" alt="RubberDuck"></img>
 
+## Open Weather MAP
+
+URL : [https://openweathermap.org/][https://openweathermap.org/]
