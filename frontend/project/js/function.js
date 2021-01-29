@@ -40,10 +40,12 @@ function updateCenterCoordinate(){
 
 function watchLocation() {
 
+    document.querySelector('.input-address').value = '';
+
     if (navigator.geolocation) {
 
       watchID = navigator.geolocation.watchPosition(function(position){
-        
+
         // 기존 마커 삭제
         if(marker != ''){
             marker.setMap(null);
@@ -73,9 +75,21 @@ function watchLocation() {
 
 }
 
+function stopWatch(dom){
+
+    dom.setAttribute('class', 'button-position');
+
+    navigator.geolocation.clearWatch(watchID);
+
+    watchStatus = false;
+
+}
+
 // let address = '서울시 금천구 가산디지털2로 115';
 
 function formSearch(){
+
+    stopWatch( document.querySelector('.button-position') );
 
     let address = document.querySelector('.input-address').value;
 
@@ -138,11 +152,7 @@ document.querySelector('.button-position').addEventListener('click', function(){
 
     } else {
 
-        this.setAttribute('class', 'button-position');
-
-        navigator.geolocation.clearWatch(watchID);
-
-        watchStatus = false;
+        stopWatch(this);
 
     }
 
