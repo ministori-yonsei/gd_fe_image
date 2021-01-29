@@ -13,7 +13,9 @@ var watchStatus = false;
 
 var watchID;
 
-var marker = '';
+var watchMarker = '';
+var searchMarker = '';
+
 
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
@@ -47,8 +49,8 @@ function watchLocation() {
       watchID = navigator.geolocation.watchPosition(function(position){
 
         // 기존 마커 삭제
-        if(marker != ''){
-            marker.setMap(null);
+        if(watchMarker != ''){
+            watchMarker.setMap(null);
         }
 
         console.log(position.coords);
@@ -57,7 +59,7 @@ function watchLocation() {
         var markerPosition  = new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude); 
 
         // 마커를 생성합니다
-        marker = new kakao.maps.Marker({
+        watchMarker = new kakao.maps.Marker({
             position: markerPosition
         });
 
@@ -65,7 +67,7 @@ function watchLocation() {
         map.setCenter(markerPosition);
 
         // 마커가 지도 위에 표시되도록 설정합니다
-        marker.setMap(map);
+        watchMarker.setMap(map);
 
       });
 
@@ -96,6 +98,10 @@ function formSearch(){
     // 주소로 좌표를 검색합니다
     geocoder.addressSearch( address, function(result, status){
 
+        if(searchMarker != ''){
+            searchMarker.setMap(null);
+        }
+
         // 정상적으로 검색이 완료됐으면
         if (status === kakao.maps.services.Status.OK) {
 
@@ -103,7 +109,7 @@ function formSearch(){
             var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
             // 결과값으로 받은 위치를 마커로 표시합니다
-            var marker = new kakao.maps.Marker({
+            searchMarker = new kakao.maps.Marker({
                 map: map,
                 position: coords
             });
