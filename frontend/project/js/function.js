@@ -16,11 +16,12 @@ var watchID;
 var watchMarker = '';
 var searchMarker = '';
 
+// let address = '서울시 금천구 가산디지털2로 115';
 
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
 
-// 지도 현재위치 좌표로 중심 표시
+// 페이지 로딩시 지도에 현재위치를 좌표로 중심 표시
 function updateCenterCoordinate(){
 
     if (navigator.geolocation) {
@@ -32,6 +33,8 @@ function updateCenterCoordinate(){
             // 현재 위치 좌표로 지도를 재 생성
             map = new kakao.maps.Map(container, options);
 
+            getWeatherData(position.coords.latitude, position.coords.longitude);
+
         });
   
       } else { 
@@ -40,6 +43,7 @@ function updateCenterCoordinate(){
 
 }
 
+// 현재 위치를 모니터링
 function watchLocation() {
 
     document.querySelector('.input-address').value = '';
@@ -87,8 +91,7 @@ function stopWatch(dom){
 
 }
 
-// let address = '서울시 금천구 가산디지털2로 115';
-
+// 주소로 위치 검색
 function formSearch(){
 
     stopWatch( document.querySelector('.button-position') );
@@ -163,4 +166,57 @@ document.querySelector('.button-position').addEventListener('click', function(){
     }
 
 });
+
+
+// 날씨
+function getWeatherData(weatherLatiude, weatherLongitude){
+
+    fetch('http://api.openweathermap.org/data/2.5/weather?lat=' + weatherLatiude + '&lon=' + weatherLongitude + '&appid=38839cb93ff3097889b4eba2996ff3d5')
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(myJson){
+    
+        extractWeatherData(myJson);
+    
+    });
+
+}
+
+function extractWeatherData(weatherJson){
+    
+    console.log(weatherJson.weather[0].main);
+
+    document.querySelector('.popup-weather-text').innerHTML = weatherJson.weather[0].main;
+
+    console.log(weatherJson.weather[0].id);
+
+    let groupID = Math.floor( weatherJson.weather[0].id / 100 );
+
+    console.log(groupID);
+
+    if( groupID == 8 ){
+
+        switch( weatherJson.weather[0].id ){
+            case 800:
+
+            default:
+                
+        }
+
+    } else {
+
+        switch(groupID){
+            case 2:
+            case 3:
+            case 5:
+            case 6:
+            case 7:
+        }
+
+    }
+
+    console.log( Math.floor( weatherJson.main.temp - 273.15 ) );
+
+}
 
