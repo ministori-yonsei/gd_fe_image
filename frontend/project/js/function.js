@@ -9,6 +9,12 @@ var options = {
 
 var map;
 
+var watchStatus = false;
+
+var watchID;
+
+var marker = '';
+
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
 
@@ -21,7 +27,7 @@ function updateCenterCoordinate(){
 
             options.center = new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude);
   
-            // 지도를 생성합니다
+            // 현재 위치 좌표로 지도를 재 생성
             map = new kakao.maps.Map(container, options);
 
         });
@@ -36,9 +42,28 @@ function watchLocation() {
 
     if (navigator.geolocation) {
 
-      navigator.geolocation.watchPosition(function(position){
+      watchID = navigator.geolocation.watchPosition(function(position){
         
-        
+        // 기존 마커 삭제
+        if(marker != ''){
+            marker.setMap(null);
+        }
+
+        console.log(position.coords);
+
+        // 마커가 표시될 위치입니다 
+        var markerPosition  = new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude); 
+
+        // 마커를 생성합니다
+        marker = new kakao.maps.Marker({
+            position: markerPosition
+        });
+
+        // 마커 위치로 지도 중심 이동
+        map.setCenter(markerPosition);
+
+        // 마커가 지도 위에 표시되도록 설정합니다
+        marker.setMap(map);
 
       });
 
@@ -78,6 +103,7 @@ function formSearch(){
 
 }
 
+// 초기값으로 맵 생성
 map = new kakao.maps.Map(container, options);
 
 // 지도 중심 위치를 현재위치로 업데이트
@@ -102,9 +128,23 @@ document.querySelector('.input-address').addEventListener('keypress', function(e
 
 document.querySelector('.button-position').addEventListener('click', function(){
 
-    this.setAttribute('class', 'button-position active');
+    if(watchStatus == false){
 
-    watchLocation();
+        this.setAttribute('class', 'button-position active');
+
+        watchLocation();
+
+        watchStatus = true;
+
+    } else {
+
+        this.setAttribute('class', 'button-position');
+
+        navigator.geolocation.clearWatch(watchID);
+
+        watchStatus = false;
+
+    }
 
 });
 
