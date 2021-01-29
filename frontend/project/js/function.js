@@ -120,6 +120,15 @@ function formSearch(){
             // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
             map.setCenter(coords);
 
+            console.log(result[0].address.region_1depth_name);
+            document.querySelector('.popup-address-1depth').innerHTML = result[0].address.region_1depth_name;
+            console.log(result[0].address.region_2depth_name);
+            document.querySelector('.popup-address-2depth').innerHTML = result[0].address.region_2depth_name;
+            console.log(result[0].address.region_3depth_name);
+            document.querySelector('.popup-address-3depth').innerHTML = result[0].address.region_3depth_name;
+            console.log(result[0].address.region_3depth_h_name);
+            document.querySelector('.popup-address-3depth-h').innerHTML = result[0].address.region_3depth_h_name;
+
         }
 
     } );
@@ -195,28 +204,48 @@ function extractWeatherData(weatherJson){
 
     console.log(groupID);
 
+    $('.climacon').remove('active');
+
     if( groupID == 8 ){
 
         switch( weatherJson.weather[0].id ){
-            case 800:
+            case 800: // climacon_sunFill
+                $('.climacon_sunFill').addClass('active');
+                break;
 
-            default:
-                
+            default: // climacon_cloudFill
+                $('.climacon_cloudFill').addClass('active');
+                break;
+
         }
 
     } else {
 
         switch(groupID){
-            case 2:
-            case 3:
-            case 5:
-            case 6:
-            case 7:
+            case 2: // climacon_cloudLightningFill
+                $('.climacon_cloudLightningFill').addClass('active');
+                break;
+            case 3: // climacon_cloudDrizzleFill
+                $('.climacon_cloudDrizzleFill').addClass('active');
+                break;
+            case 5: // climacon_cloudRainFill
+                $('.climacon_cloudRainFill').addClass('active');
+                break;
+            case 6: // climacon_cloudSnowAltFill
+                $('.climacon_cloudSnowAltFill').addClass('active');
+                break;
+            case 7: // climacon_cloudFogFill
+                $('.climacon_cloudFogFill').addClass('active');
+                break;
         }
 
     }
 
     console.log( Math.floor( weatherJson.main.temp - 273.15 ) );
+
+    let temp = Math.floor( weatherJson.main.temp - 273.15 );
+
+    document.querySelector('.popup-temp-number').innerHTML = temp;
 
 }
 
