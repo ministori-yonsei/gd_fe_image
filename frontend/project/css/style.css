@@ -75,14 +75,16 @@ html, body{
     position:absolute;
     top:0;
     left:0;
+
+    box-shadow:0px 0px 5px rgba(0,0,0,0.5);
 }
 
 .input-address{
+    display:block;
     width:300px;
     height:36px;
     box-sizing:border-box;
     border:none;
-    box-shadow:0px 0px 5px rgba(0,0,0,0.5);
     border-radius:5px;
     padding:10px;
 }
@@ -128,6 +130,10 @@ html, body{
     text-indent:-99999em;
     background-size:28px 28px;
     background-repeat:no-repeat;
+}
+
+.button-position.active{
+    background-image:url(../images/current_position_active.png);
 }
 
 @media screen and (max-width:460px){

@@ -12,6 +12,22 @@ var map = new kakao.maps.Map(container, options);
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
 
+function getLocation() {
+
+    if (navigator.geolocation) {
+
+      navigator.geolocation.watchPosition(function(position){
+        
+        console.log(position.coords);
+
+      });
+
+    } else { 
+      alert('Not Support!');
+    }
+
+}
+
 // let address = '서울시 금천구 가산디지털2로 115';
 
 function formSearch(){
@@ -35,6 +51,7 @@ function formSearch(){
 
             // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
             map.setCenter(coords);
+
         }
 
     } );
@@ -56,3 +73,12 @@ document.querySelector('.input-address').addEventListener('keypress', function(e
     }
 
 });
+
+document.querySelector('.button-position').addEventListener('click', function(){
+
+    this.setAttribute('class', 'button-position active');
+
+    getLocation();
+
+});
+
