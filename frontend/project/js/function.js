@@ -33,6 +33,19 @@ function updateCenterCoordinate(){
             // 현재 위치 좌표로 지도를 재 생성
             map = new kakao.maps.Map(container, options);
 
+            geocoder.coord2Address(position.coords.longitude, position.coords.latitude, function(result, status){
+
+                console.log(result[0].address.region_1depth_name);
+                document.querySelector('.popup-address-1depth').innerHTML = result[0].address.region_1depth_name;
+                console.log(result[0].address.region_2depth_name);
+                document.querySelector('.popup-address-2depth').innerHTML = result[0].address.region_2depth_name;
+                console.log(result[0].address.region_3depth_name);
+                document.querySelector('.popup-address-3depth').innerHTML = result[0].address.region_3depth_name;
+
+                document.querySelector('.popup-address-3depth-h').innerHTML = '';
+
+            });
+
             getWeatherData(position.coords.latitude, position.coords.longitude);
 
         });
@@ -72,6 +85,21 @@ function watchLocation() {
 
         // 마커가 지도 위에 표시되도록 설정합니다
         watchMarker.setMap(map);
+
+        geocoder.coord2Address(position.coords.longitude, position.coords.latitude, function(result, status){
+
+            console.log(result[0].address.region_1depth_name);
+            document.querySelector('.popup-address-1depth').innerHTML = result[0].address.region_1depth_name;
+            console.log(result[0].address.region_2depth_name);
+            document.querySelector('.popup-address-2depth').innerHTML = result[0].address.region_2depth_name;
+            console.log(result[0].address.region_3depth_name);
+            document.querySelector('.popup-address-3depth').innerHTML = result[0].address.region_3depth_name;
+
+            document.querySelector('.popup-address-3depth-h').innerHTML = '';
+
+        });
+
+        getWeatherData(position.coords.latitude, position.coords.longitude);
 
       });
 
@@ -128,6 +156,8 @@ function formSearch(){
             document.querySelector('.popup-address-3depth').innerHTML = result[0].address.region_3depth_name;
             console.log(result[0].address.region_3depth_h_name);
             document.querySelector('.popup-address-3depth-h').innerHTML = result[0].address.region_3depth_h_name;
+
+            getWeatherData(result[0].y, result[0].x);
 
         }
 
@@ -204,7 +234,7 @@ function extractWeatherData(weatherJson){
 
     console.log(groupID);
 
-    $('.climacon').remove('active');
+    $('.climacon').removeClass('active');
 
     if( groupID == 8 ){
 
@@ -249,3 +279,16 @@ function extractWeatherData(weatherJson){
 
 }
 
+document.querySelector('.button-weather').addEventListener('click', function(){
+
+    $('.popup').addClass('active');
+    $('.popup-contents').addClass('active');
+
+});
+
+document.querySelector('.popup').addEventListener('click', function(){
+
+    $('.popup').removeClass('active');
+    $('.popup-contents').removeClass('active');
+
+});

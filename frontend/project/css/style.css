@@ -137,21 +137,17 @@ html, body{
 
 .popup{
     position:absolute;
-    top:100px;
+    top:0;
     left:0;
     width:100%;
     height:100%;
     background-color:rgba(0,0,0,0.8);
     z-index:990;
-    display:flex;
-    justify-content: center;
-    align-items: center;
+    display:none;
 }
 
 .popup.active{
-    display:flex;
-    justify-content: center;
-    align-items: center;
+    display:block;
 }
 
 .popup-contents{
@@ -163,6 +159,12 @@ html, body{
     box-sizing:border-box;
     display:block;
     color:#000;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    z-index:990;
+    display:none;
 }
 
 .popup-contents.active{
@@ -240,20 +242,23 @@ div.wrapper{
     }
 
     .popup{
-        display:none;
+        top:100%;
     }
 
     .popup.active{
-        display:block;
+        top:0;
     }
 
     .popup-contents{
         width:100%;
         height:350px;
         position:absolute;
+        top:auto;
         left:0;
         bottom:-350px;
+        transform:translate(0,0);
         transition:bottom 1s;
+        display:block;
     }
 
     .popup-contents.active{
