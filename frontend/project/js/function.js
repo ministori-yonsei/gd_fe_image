@@ -1,24 +1,44 @@
 // 지도를 표시할 div 
 var container = document.getElementById('map');
+
 // 초기값
 var options = {
     center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
     level: 3 // 지도의 확대 레벨
 };
 
-// 지도를 생성합니다
-var map = new kakao.maps.Map(container, options);
+var map;
 
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
 
-function getLocation() {
+// 지도 현재위치 좌표로 중심 표시
+function updateCenterCoordinate(){
+
+    if (navigator.geolocation) {
+
+        navigator.geolocation.getCurrentPosition(function(position){
+
+            options.center = new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  
+            // 지도를 생성합니다
+            map = new kakao.maps.Map(container, options);
+
+        });
+  
+      } else { 
+        alert('Not Support!');
+      }
+
+}
+
+function watchLocation() {
 
     if (navigator.geolocation) {
 
       navigator.geolocation.watchPosition(function(position){
         
-        console.log(position.coords);
+        
 
       });
 
@@ -58,6 +78,12 @@ function formSearch(){
 
 }
 
+map = new kakao.maps.Map(container, options);
+
+// 지도 중심 위치를 현재위치로 업데이트
+updateCenterCoordinate();
+
+
 document.querySelector('.button-search').addEventListener('click', function(){
 
     formSearch();
@@ -78,7 +104,7 @@ document.querySelector('.button-position').addEventListener('click', function(){
 
     this.setAttribute('class', 'button-position active');
 
-    getLocation();
+    watchLocation();
 
 });
 
